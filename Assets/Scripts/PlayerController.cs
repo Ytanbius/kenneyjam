@@ -1,16 +1,37 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private float inputX;
+    private float inputY;
+    public float speed = 200;
+    public float lookSpeed = 100;
+    Rigidbody rb;
+    Animator animator;
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        MyInput();
+        Vector3 move = new Vector3(inputX, 0, inputY);
+        if (move != new Vector3(0, 0, 0))
+        {
+            transform.forward = Vector3.Lerp(move, transform.forward, lookSpeed * Time.deltaTime);
+            rb.AddForce(move * Time.deltaTime * speed);
+            animator.SetInteger("moving", 1);
+        }
+        else
+        {
+            animator.SetInteger("moving", 0);
+        }
+    }
+    void MyInput()
+    {
+        inputX = Input.GetAxis("Horizontal");
+        inputY = Input.GetAxis("Vertical");
     }
 }
