@@ -15,8 +15,10 @@ public class Menu : MonoBehaviour
     }
 
     
-    
-    
+    public void Exitscene()
+    {
+        Application.Quit();
+    }
     
     
 }
