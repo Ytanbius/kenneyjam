@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("tomate"))
         {
+            if(Input.GetKey(KeyCode.E))
+            {
+
+            }
             Debug.Log("entrado");
         }
 
