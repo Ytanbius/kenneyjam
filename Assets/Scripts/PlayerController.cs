@@ -34,4 +34,37 @@ public class PlayerController : MonoBehaviour
         inputX = Input.GetAxis("Horizontal");
         inputY = Input.GetAxis("Vertical");
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("tomate"))
+        {
+            Debug.Log("entrado");
+        }
+
+        else if (other.CompareTag("abacaxi"))
+        {
+            Debug.Log("entrado");
+        }
+
+        else if (other.CompareTag("carne"))
+        {
+            Debug.Log("entrado");
+        }
+
+        else if (other.CompareTag("blueberry"))
+        {
+            Debug.Log("entrado");
+        }
+
+        else if (other.CompareTag("maca"))
+        {
+            Debug.Log("entrado");
+        }
+
+        else if (other.CompareTag("batata"))
+        {
+            Debug.Log("entrado");
+        }
+    }
 }
