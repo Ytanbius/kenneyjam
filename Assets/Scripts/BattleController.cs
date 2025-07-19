@@ -29,7 +29,7 @@ public class BattleController : MonoBehaviour
     private bool battle = false;
     private bool cdBool = false;
     private float cdTime = 2;
-    public int round = 0;
+    public int round = 1;
     private void OnTriggerStay(Collider other)
     {
         string name = other.gameObject.name;
@@ -78,7 +78,7 @@ public class BattleController : MonoBehaviour
             {
                 enemies.Add(Instantiate(enemyObj, new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 0)));
                 getModel(enemies[i], Random.Range(0, enemyModels.Length));
-                genEnemyRandomStats(i);
+                genEnemyRandomStats(i, true);
             }
         }
         else if (button == 0)
@@ -92,7 +92,7 @@ public class BattleController : MonoBehaviour
         {
             enemies.Add(Instantiate(enemyObj, new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 0)));
             getModel(enemies[enemies.Count-1], Random.Range(0, enemyModels.Length));
-            genEnemyRandomStats(enemies.Count - 1);
+            genEnemyRandomStats(enemies.Count - 1, true);
         }
         if (enemies.Count != 0 && button == 2)
         {
@@ -100,13 +100,18 @@ public class BattleController : MonoBehaviour
             enemies.Remove(enemies[enemies.Count - 1]);
         }
     }
-    public void genEnemyRandomStats(int i)
+    public void genEnemyRandomStats(int i, bool element)
     {
         EnemyController eCtrl = enemies[i].GetComponent<EnemyController>();
         eCtrl.enemyHP = Random.Range(5, 21);
         eCtrl.enemyDMG = Random.Range(1, 6);
         eCtrl.enemySPD = Random.Range(1, 6);
-        eCtrl.enemyElement = Elements[Random.Range(0, Elements.Length)];
+        if (element)
+            eCtrl.enemyElement = Elements[Random.Range(0, Elements.Length)];
+        else
+            eCtrl.enemyElement = Elements[0];
+        eCtrl.enemyType = Random.Range(1, 5);
+        eCtrl.genType(round);
     }
     void RoundStart()
     {
@@ -131,8 +136,11 @@ public class BattleController : MonoBehaviour
             cam.transform.position = pos2.position;
             cam.transform.rotation = pos2.rotation;
             battle = true;
-            round += 1;
         }
+    }
+    void PreparePhase()
+    {
+
     }
     void RoundEnd()
     {
@@ -140,7 +148,21 @@ public class BattleController : MonoBehaviour
     }
     void GenEnemies()
     {
-
+        int roundEnemiesQnt = 3;
+        if(round > 1)
+            roundEnemiesQnt += Random.Range(0 + round, 2 * round + 1);
+        for (int i = 0; i < roundEnemiesQnt; i++)
+        {
+            enemies.Add(Instantiate(enemyObj, new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 0)));
+            if (round != 1)
+            {
+                genEnemyRandomStats(i, true);
+            }
+            else
+            {
+                genEnemyRandomStats(i, false);
+            }
+        }
     }
     void GenHeroes()
     {
