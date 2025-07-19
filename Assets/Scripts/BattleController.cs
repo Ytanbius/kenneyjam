@@ -14,12 +14,13 @@ public class BattleController : MonoBehaviour
     public Transform[] enemiesPos;
     public GameObject[] heroesChoice;
     public GameObject[] enemiesChoice;
+    public string[] Elements;
     //Misc
     public Camera cam;
     public Transform pos1;
     public Transform pos2;
     public GameObject enemyOBJ;
-    public GameObject enemiesNum;
+    public GameObject player;
     private bool battle = false;
     private bool cooldownb = false;
     private float cooldownt = 2;
@@ -36,8 +37,12 @@ public class BattleController : MonoBehaviour
     }
     void battleButton(string name)
     {
-        if (name == "Player" && Input.GetKey("e") && !battle && !cooldownb)
+        PlayerController pCtrl = player.GetComponent<PlayerController>();
+        Animator pAnim = pCtrl.GetComponentInChildren<Animator>();
+        if (name == "Player" && Input.GetKey("e") && !battle && !cooldownb && enemies.Count != 0)
         {
+            pAnim.SetInteger("moving", 0);
+            pCtrl.enabled = false;
             for (int i = 0; i < enemiesChoice.Length; i++)
             {
                 enemiesChoice[i] = enemies[i];
@@ -51,6 +56,7 @@ public class BattleController : MonoBehaviour
         }
         else if (Input.GetKey("e") && battle && !cooldownb)
         {
+            pCtrl.enabled = true;
             cam.transform.position = pos1.position;
             cam.transform.rotation = pos1.rotation;
             battle = false;
@@ -77,7 +83,7 @@ public class BattleController : MonoBehaviour
         }
         if (button == 1)
         {
-            enemies.Add(Instantiate(enemyOBJ, new Vector3(100, 100, 100), Quaternion.Euler(0, 0, 0)));
+            enemies.Add(Instantiate(enemyOBJ, new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 0)));
             generateEnemyStats(enemies.Count-1);
         }
         if (enemies.Count != 0 && button == 2)
@@ -89,6 +95,9 @@ public class BattleController : MonoBehaviour
     public void generateEnemyStats(int i)
     {
         EnemyController eCtrl = enemies[i].GetComponent<EnemyController>();
-        eCtrl.enemyHP = Random.Range(5, 10);
+        eCtrl.enemyHP = Random.Range(5, 21);
+        eCtrl.enemyDMG = Random.Range(1, 6);
+        eCtrl.enemySPD = Random.Range(1, 6);
+        eCtrl.enemyElement = Elements[Random.Range(0, 3)];
     }
 }
