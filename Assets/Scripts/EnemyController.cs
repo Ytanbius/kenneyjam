@@ -11,6 +11,10 @@ public class EnemyController : MonoBehaviour
     public string enemyElement;
     public string enemyType;
     public string enemyName;
+    //Arrays
+    public float[] dmgVar;
+    public float[] spdVar;
+    public float[] hpVar;
     //MISC
     public bool cooldownB = false;
     IEnumerator atkCooldown()
@@ -18,5 +22,4 @@ public class EnemyController : MonoBehaviour
         cooldownB = true;
         yield return new WaitForSeconds(100 / enemySPD);
         cooldownB = false;
-    }
-}
+    }}

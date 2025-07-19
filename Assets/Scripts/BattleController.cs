@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class BattleController : MonoBehaviour
 {
@@ -14,16 +16,20 @@ public class BattleController : MonoBehaviour
     public Transform[] enemiesPos;
     public GameObject[] heroesChoice;
     public GameObject[] enemiesChoice;
+    public GameObject[] enemyModels;
+    public GameObject[] heroesModels;
     public string[] Elements;
     //Misc
     public Camera cam;
     public Transform pos1;
     public Transform pos2;
-    public GameObject enemyOBJ;
+    public GameObject enemyObj;
+    public GameObject heroObj;
     public GameObject player;
     private bool battle = false;
-    private bool cooldownb = false;
-    private float cooldownt = 2;
+    private bool cdBool = false;
+    private float cdTime = 2;
+    public int round = 0;
     private void OnTriggerStay(Collider other)
     {
         string name = other.gameObject.name;
@@ -31,15 +37,15 @@ public class BattleController : MonoBehaviour
     }
     IEnumerator cooldown()
     {
-        cooldownb = true;
-        yield return new WaitForSeconds(cooldownt);
-        cooldownb = false;
+        cdBool = true;
+        yield return new WaitForSeconds(cdTime);
+        cdBool = false;
     }
     void battleButton(string name)
     {
         PlayerController pCtrl = player.GetComponent<PlayerController>();
-        Animator pAnim = pCtrl.GetComponentInChildren<Animator>();
-        if (name == "Player" && Input.GetKey("e") && !battle && !cooldownb && enemies.Count != 0)
+        Animator pAnim = player.GetComponentInChildren<Animator>();
+        if (name == "Player" && Input.GetKey("e") && !battle && !cdBool && enemies.Count != 0)
         {
             pAnim.SetInteger("moving", 0);
             pCtrl.enabled = false;
@@ -54,7 +60,7 @@ public class BattleController : MonoBehaviour
             battle = true;
             StartCoroutine(cooldown());
         }
-        else if (Input.GetKey("e") && battle && !cooldownb)
+        else if (Input.GetKey("e") && battle && !cdBool)
         {
             pCtrl.enabled = true;
             cam.transform.position = pos1.position;
@@ -70,8 +76,9 @@ public class BattleController : MonoBehaviour
             int num = Random.Range(1, 7);
             for (int i = 0; i < num; i++)
             {
-                enemies.Add(Instantiate(enemyOBJ, new Vector3(100, 100, 100), Quaternion.Euler(0, 0, 0)));
-                generateEnemyStats(i);
+                enemies.Add(Instantiate(enemyObj, new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 0)));
+                getModel(enemies[i], Random.Range(0, enemyModels.Length));
+                genEnemyRandomStats(i);
             }
         }
         else if (button == 0)
@@ -83,8 +90,9 @@ public class BattleController : MonoBehaviour
         }
         if (button == 1)
         {
-            enemies.Add(Instantiate(enemyOBJ, new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 0)));
-            generateEnemyStats(enemies.Count-1);
+            enemies.Add(Instantiate(enemyObj, new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 0)));
+            getModel(enemies[enemies.Count-1], Random.Range(0, enemyModels.Length));
+            genEnemyRandomStats(enemies.Count - 1);
         }
         if (enemies.Count != 0 && button == 2)
         {
@@ -92,12 +100,77 @@ public class BattleController : MonoBehaviour
             enemies.Remove(enemies[enemies.Count - 1]);
         }
     }
-    public void generateEnemyStats(int i)
+    public void genEnemyRandomStats(int i)
     {
         EnemyController eCtrl = enemies[i].GetComponent<EnemyController>();
         eCtrl.enemyHP = Random.Range(5, 21);
         eCtrl.enemyDMG = Random.Range(1, 6);
         eCtrl.enemySPD = Random.Range(1, 6);
-        eCtrl.enemyElement = Elements[Random.Range(0, 3)];
+        eCtrl.enemyElement = Elements[Random.Range(0, Elements.Length)];
+    }
+    void RoundStart()
+    {
+        PlayerController pCtrl = player.GetComponent<PlayerController>();
+        Animator pAnim = player.GetComponentInChildren<Animator>();
+        if (!battle && enemies.Count != 0 && heroes.Count !=0)
+        {
+            pAnim.SetInteger("moving", 0);
+            pCtrl.enabled = false;
+            for (int i = 0; i < enemiesChoice.Length; i++)
+            {
+                enemiesChoice[i] = enemies[i];
+                enemiesChoice[i].transform.position = enemiesPos[i].transform.position;
+                enemiesChoice[i].transform.rotation = enemiesPos[i].transform.rotation;
+            }
+            for (int i = 0; i < heroesChoice.Length; i++)
+            {
+                heroesChoice[i] = heroes[i];
+                heroesChoice[i].transform.position = heroesPos[i].transform.position;
+                heroesChoice[i].transform.rotation = heroesPos[i].transform.rotation;
+            }
+            cam.transform.position = pos2.position;
+            cam.transform.rotation = pos2.rotation;
+            battle = true;
+            round += 1;
+        }
+    }
+    void RoundEnd()
+    {
+
+    }
+    void GenEnemies()
+    {
+
+    }
+    void GenHeroes()
+    {
+        
+    }
+    public void getModel(GameObject side, int modelID)
+    {
+        if (side.GetComponent<EnemyController>() != null)
+        {
+            Debug.Log("enemyModel: " + modelID);
+            if (side.transform.GetChild(0).childCount > 0)
+            {
+                Destroy(side.transform.GetChild(0).gameObject);
+            }
+            GameObject model = Instantiate(enemyModels[modelID], side.transform.position, Quaternion.identity);
+            model.transform.SetParent(side.transform);
+            model.layer = 0;
+        }
+        else if (side.GetComponent<HeroController>() != null)
+        {
+            Debug.Log("heroModel: " + modelID);
+            if (side.transform.GetChild(0).childCount > 0)
+            {
+                Destroy(side.transform.GetChild(0).gameObject);
+            }
+            GameObject model = Instantiate(heroesModels[modelID], side.transform.position, Quaternion.identity);
+            model.transform.SetParent(side.transform);
+            model.layer = 0;
+        }
+        else
+            Debug.LogError("ERROR getModel");
     }
 }
