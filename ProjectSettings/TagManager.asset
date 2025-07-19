@@ -11,6 +11,7 @@ TagManager:
   - blueberry
   - abacaxi
   - Spawn
+  - segurando
   layers:
   - Default
   - TransparentFX
