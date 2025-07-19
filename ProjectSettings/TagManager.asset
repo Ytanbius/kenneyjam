@@ -10,6 +10,7 @@ TagManager:
   - maca
   - blueberry
   - abacaxi
+  - Spawn
   layers:
   - Default
   - TransparentFX
