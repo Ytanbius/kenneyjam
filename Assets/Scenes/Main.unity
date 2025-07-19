@@ -1256,6 +1256,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &839826534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523082534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58bf832bd33692c4ea506e47b0cbf727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawn: {fileID: 1561910624}
+  tomate: {fileID: 919132149155446097, guid: 7cc73a6681f97a041afeb62831e38f04, type: 3}
+  pegando: 1
 --- !u!1 &927916702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2155,6 +2170,14 @@ PrefabInstance:
       value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 4090588600324261764, guid: f656a105f59ee534c8b541d2958c07f1, type: 3}
+      propertyPath: tomate
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: 7cc73a6681f97a041afeb62831e38f04, type: 3}
+    - target: {fileID: 4090588600324261764, guid: f656a105f59ee534c8b541d2958c07f1, type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 1561910624}
+    - target: {fileID: 4090588600324261764, guid: f656a105f59ee534c8b541d2958c07f1, type: 3}
       propertyPath: lookSpeed
       value: 100
       objectReference: {fileID: 0}
@@ -2185,6 +2208,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 896933832753291091, guid: f656a105f59ee534c8b541d2958c07f1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 839826530}
+    - targetCorrespondingSourceObject: {fileID: 896933832753291091, guid: f656a105f59ee534c8b541d2958c07f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 839826534}
   m_SourcePrefab: {fileID: 100100000, guid: f656a105f59ee534c8b541d2958c07f1, type: 3}
 --- !u!1 &1893424062
 GameObject:
