@@ -1,16 +1,22 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    //STATS
+    public float enemyHP;
+    public float enemyDMG;
+    public float enemySPD;
+    //INFO
+    public string enemyElement;
+    public string enemyType;
+    public string enemyName;
+    //MISC
+    public bool cooldownB = false;
+    IEnumerator atkCooldown()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        cooldownB = true;
+        yield return new WaitForSeconds(100 / enemySPD);
+        cooldownB = false;
     }
 }
