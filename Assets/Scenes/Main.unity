@@ -582,6 +582,7 @@ GameObject:
   - component: {fileID: 449299376}
   - component: {fileID: 449299375}
   - component: {fileID: 449299378}
+  - component: {fileID: 449299379}
   m_Layer: 0
   m_Name: fogao
   m_TagString: maca
@@ -700,6 +701,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.99999994, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &449299379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449299373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5159f78f76c20da42b9e6611dbeefbf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carne: {fileID: 8130848946318120207, guid: 3463e1d090f571a4c9bbad488353ca73, type: 3}
+  carnepronta: {fileID: 919132149155446097, guid: 21e201a8f7eb75049bfaadba780708f2, type: 3}
+  assando: 0
+  pronto: 0
+  item: {fileID: 0}
+  cooldown: 6
+  segur: {fileID: 0}
+  panela: {fileID: 1869491826}
+  colocado: 0
 --- !u!1 &491549880
 GameObject:
   m_ObjectHideFlags: 0
@@ -2259,6 +2281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 896933832753291091, guid: f656a105f59ee534c8b541d2958c07f1, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 2093872321184455680, guid: f656a105f59ee534c8b541d2958c07f1, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -2324,7 +2350,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1869491826}
   - component: {fileID: 1869491827}
-  - component: {fileID: 1869491828}
   m_Layer: 0
   m_Name: frigideira
   m_TagString: Untagged
@@ -2368,23 +2393,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1869491828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1869491825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5159f78f76c20da42b9e6611dbeefbf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  assando: 0
-  pronto: 0
-  item: {fileID: 0}
-  cooldown: 6
-  segur: {fileID: 0}
 --- !u!1 &1893424062
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1a765b28af87bdc41aa71a656989010f, type: 3}
       propertyPath: m_TagString
-      value: abacaxi
+      value: segurando
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

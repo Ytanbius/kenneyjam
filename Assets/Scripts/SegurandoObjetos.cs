@@ -65,11 +65,12 @@ public class SegurandoObjetos : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.E) && maoocupada == true)
             {
+                Destroy(GameObject.FindWithTag("segurando"));
                 pegando = false;
                 maoocupada = false;
                 Debug.Log("colocado");
-                segurandoitem.transform.parent = fogao.transform;
-                segurandoitem.transform.SetPositionAndRotation(fogao.position, fogao.rotation);
+               
+                
             }
         }
     }
