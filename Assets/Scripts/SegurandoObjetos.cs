@@ -8,8 +8,8 @@ public class SegurandoObjetos : MonoBehaviour
     public GameObject carne;
     public Transform fogao;
     public bool pegando = false;
-    private bool maoocupada = false;
-    private GameObject segurandoitem;
+    public bool maoocupada = false;
+    public GameObject segurandoitem;
     
 
     private void Update()

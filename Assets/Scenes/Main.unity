@@ -582,7 +582,6 @@ GameObject:
   - component: {fileID: 449299376}
   - component: {fileID: 449299375}
   - component: {fileID: 449299378}
-  - component: {fileID: 449299379}
   m_Layer: 0
   m_Name: fogao
   m_TagString: maca
@@ -701,22 +700,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.99999994, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &449299379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449299373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5159f78f76c20da42b9e6611dbeefbf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  assando: 0
-  pronto: 0
-  item: 
-  cooldown: 6
 --- !u!1 &491549880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,6 +1350,8 @@ MonoBehaviour:
   carne: {fileID: 8130848946318120207, guid: 3463e1d090f571a4c9bbad488353ca73, type: 3}
   fogao: {fileID: 1869491826}
   pegando: 1
+  maoocupada: 0
+  segurandoitem: {fileID: 0}
 --- !u!1 &927916702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,8 +2382,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   assando: 0
   pronto: 0
-  item: 
+  item: {fileID: 0}
   cooldown: 6
+  segur: {fileID: 0}
 --- !u!1 &1893424062
 GameObject:
   m_ObjectHideFlags: 0
