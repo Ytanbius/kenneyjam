@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2476102660674979916}
   - component: {fileID: 7248339450058278230}
   - component: {fileID: 1882539731677349683}
+  - component: {fileID: 5730602469851443576}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -84,6 +85,30 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5730602469851443576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864885891096380775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f692e0929b4b6249806948a18e9c4c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroHP: 0
+  heroDMG: 0
+  heroSPD: 0
+  heroElement: 
+  heroClass: 0
+  dmgVar: []
+  spdVar: []
+  hpVar: []
+  cooldownB: 0
+  target: {fileID: 0}
+  battleController: {fileID: 1731255619847610033, guid: f509f81ca52e3984c8fe062542ff99a7, type: 3}
+  bCtrl: {fileID: 0}
 --- !u!1001 &9030136319903436165
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,36 +16,65 @@ public class EnemyController : MonoBehaviour
     public float[] hpVar;
     //MISC
     public bool cooldownB = false;
+    public bool canAttack = false;
+    public GameObject target;
+    public GameObject battleController;
+    public BattleController bCtrl;
+    private void Start()
+    {
+        bCtrl = battleController.GetComponent<BattleController>();
+    }
+    private void Update()
+    {
+        Attack();
+        CheckStatus();
+    }
+    void Attack()
+    {
+        HeroController eCrtl = target.GetComponent<HeroController>();
+        if (!cooldownB && canAttack)
+        {
+            eCrtl.heroHP -= enemyDMG;
+            StartCoroutine(atkCooldown());
+        }
+    }
+    void CheckStatus()
+    {
+        if(enemyHP <= 0)
+        {
+            enemyHP = 0;
+            bCtrl.destroyTarget(gameObject);
+        }
+    }
     IEnumerator atkCooldown()
     {
         cooldownB = true;
-        yield return new WaitForSeconds(100 / enemySPD);
+        yield return new WaitForSeconds((int)(30 / enemySPD));
         cooldownB = false;
     }
     public void genType(int rounds)
     {
-        rounds -= 1;
         switch (enemyType)
         {
-            case 1: //minion
-                enemyHP += enemyHP * ((int)(rounds * 0.2));
-                enemyDMG += enemyDMG * ((int)(rounds * 0.2));
-                enemySPD += enemySPD * ((int)(rounds * 0.2));
+            case 0: //minion
+                enemyHP = 1 + (enemyHP + enemyHP * ((int)(rounds * 0.2)));
+                enemyDMG = 1 + (enemyDMG + enemyDMG * ((int)(rounds * 0.2)));
+                enemySPD = 1 + (enemySPD + enemySPD * ((int)(rounds * 0.2)));
                 break;
-            case 2: //warrior
-                enemyHP += enemyHP * ((int)(rounds * 0.5));
-                enemyDMG += enemyDMG * ((int)(rounds * 0.2));
-                enemySPD += enemySPD * ((int)(rounds * 0.2));
+            case 1: //warrior
+                enemyHP = 1 + (enemyHP + enemyHP * ((int)(rounds * 0.5)));
+                enemyDMG = 1 + (enemyDMG + enemyDMG * ((int)(rounds * 0.2)));
+                enemySPD = 1 + (enemySPD + enemySPD * ((int)(rounds * 0.2)));
                 break;
-            case 3: //ranger
-                enemyHP += enemyHP * ((int)(rounds * 0.2));
-                enemyDMG += enemyDMG * ((int)(rounds * 0.2));
-                enemySPD += enemySPD * ((int)(rounds * 0.5));
+            case 2: //ranger
+                enemyHP = 1 + (enemyHP + enemyHP * ((int)(rounds * 0.2)));
+                enemyDMG = 1 + (enemyDMG + enemyDMG * ((int)(rounds * 0.2)));
+                enemySPD = 1 + (enemySPD + enemySPD * ((int)(rounds * 0.5)));
                 break;
-            case 4: //mage
-                enemyHP -= enemyHP * ((int)(rounds * 0.5));
-                enemyDMG += enemyDMG * ((int)(rounds * 1));
-                enemySPD -= enemySPD * ((int)(rounds * 0.5));
+            case 3: //mage
+                enemyHP = 1 + (enemyHP - enemyHP * ((int)(rounds * 0.5)));
+                enemyDMG = 1 + (enemyDMG + enemyDMG * ((int)(rounds * 1)));
+                enemySPD = 1 + (enemySPD - enemySPD * ((int)(rounds * 0.5)));
                 break;
         }
     }

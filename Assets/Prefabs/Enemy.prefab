@@ -101,12 +101,15 @@ MonoBehaviour:
   enemyDMG: 0
   enemySPD: 0
   enemyElement: 
-  enemyType: 
-  enemyName: 
+  enemyType: 0
   dmgVar: []
   spdVar: []
   hpVar: []
   cooldownB: 0
+  canAttack: 0
+  target: {fileID: 0}
+  battleController: {fileID: 1731255619847610033, guid: f509f81ca52e3984c8fe062542ff99a7, type: 3}
+  bCtrl: {fileID: 0}
 --- !u!1001 &1965743985820947154
 PrefabInstance:
   m_ObjectHideFlags: 0
